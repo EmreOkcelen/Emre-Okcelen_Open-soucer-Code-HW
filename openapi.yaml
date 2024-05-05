@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  title: Games API
+  version: 1.0.0
+  description: CRUD ve listeleme fonksiyonlarını sağlayan Game API.
+
+paths:
+  /games:
+    get:
+      summary: Tüm oyunları listele
+      operationId: list_Games
+      responses:
+        '200':
+          description: Tüm oyunlar listelendi!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+    post:
+      summary: Kutuphaneye yeni bir oyun ekleme
+      operationId: create_Game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '201':
+          description: Oyun başarıyla kutuphaneye eklendi!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+
+  /games/{id}:
+    get:
+      summary: Kutuphanede belirli bir oyunu bul
+      operationId: getGame_id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Oyun bulundu!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Kutuphanede böyle bir oyun bulunamadı
+    put:
+      summary: Oyun bilgilerini güncelle
+      operationId: update_Game
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Güncelleme Gerçekleşti!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Oyun bulunamadı!
+    delete:
+      summary: Seçilen Oyunu Sil
+      operationId: delete_Game
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Oyun Silindi!
+        '404':
+          description: Oyun bulunamadı!
+
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+        Name:
+          type: string
+        Price:
+          type: integer
+        Publisher:
+          type: string
+        Release_year:
+          type: integer
+        Version:
+          type: string
+

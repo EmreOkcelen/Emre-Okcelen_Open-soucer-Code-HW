@@ -1,0 +1,21 @@
+
+###########CURL VE FLASK KULLANIM KLAVUZU ##################
+
+##ILK ADIM
+source flask-emre/bin/activate   #flask calistirmak icin kullanilan komut
+
+##OBJE KAYDETME (Altta Openapi standartina uygun bir ornek olusturulmustur)
+curl -X POST -H "Content-Type: application/json" -d '{"Name":"CoD","Price":200 , "Publisher":"xEnt", "Release_year":2022,"Version":"2.3.4"}' http://localhost:5000/games            #Oyun ekleme
+
+##GUNCELLEME(ornek olarak verilmistir)
+curl -X PUT -H "Content-Type: application/json" -d '{"Name":"abc","Price":500 , "Publisher":"xEnt", "Release_year":2022,"Version":"2.3.4"}' http://localhost:5000/games/3
+
+##SILME
+curl -X DELETE http://localhost:5000/games/{id}   ##Index secilen obje silinir
+
+
+##LISTELEME
+
+curl -X GET http://localhost:5000/games   #Oyunlari Listelemek Icin
+
+curl -X GET http://localhost:5000/games/{id}  ##spesifik bir oyunu listeleme
